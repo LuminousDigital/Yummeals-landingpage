@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Router } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface LeaderboardEntry {
   id: number;
@@ -11,6 +13,8 @@ interface LeaderboardEntry {
 }
 
 const LiveLeaderboard: React.FC = () => {
+
+  const router = useRouter();
   const [isWeekly, setIsWeekly] = useState(true);
   const [showAll, setShowAll] = useState(false);
 
@@ -40,12 +44,12 @@ const LiveLeaderboard: React.FC = () => {
   const displayedData = showAll ? allLeaderboardData : leaderboardData;
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white p-4">
+    <div className="flex items-center justify-center min-h-screen p-4 bg-white">
       <div className="w-full max-w-6xl mt-6">
-        <h2 className="text-3xl font-extrabold  text-center text-gray-800 mb-2">Live Leaderboard</h2>
+        <h2 className="mb-2 text-3xl font-extrabold text-center text-gray-800">Live Leaderboard</h2>
         <p className="text-[20px] leading-[140%] tracking-[-0.02em] text-center mb-6 text-[#000000]">See who&apos;s climbing to the top each day!</p>
         {/* Toggle Switch */}
-        <div className="flex justify-center items-center gap-4 mb-8">
+        <div className="flex items-center justify-center gap-4 mb-8">
           <span className={`font-bold ${isWeekly ? 'text-black' : 'text-black'}`}>Weekly Winners</span>
           <button
             className={`relative w-12 h-6 flex items-center bg-[#64961A] rounded-full p-1 transition-colors duration-300 focus:outline-none ${isWeekly ? 'bg-[#64961A]' : 'bg-gray-300 cursor-pointer' }`}
@@ -67,7 +71,7 @@ const LiveLeaderboard: React.FC = () => {
             >
               <div className="flex items-center gap-4">
                 {/* Rank Icon */}
-                <span className="relative w-8 h-8 flex items-center justify-center">
+                <span className="relative flex items-center justify-center w-8 h-8">
                   {index === 0 ? (
                    <Image src="/crown_1.svg" fill alt="Crown" className="w-8 h-8" />
                     // <img src="/crown_1.svg" alt="Crown" className="w-8 h-8" />
@@ -80,26 +84,26 @@ const LiveLeaderboard: React.FC = () => {
                   </span>
                 </span>
                 {/* Profile Image */}
-                <Image src={entry.imageUrl} width={12} height={12} alt={`${entry.name}'s profile`} className="w-12 h-12 rounded-full object-cover"/>
+                <Image src={entry.imageUrl} width={12} height={12} alt={`${entry.name}'s profile`} className="object-cover w-12 h-12 rounded-full"/>
 
                 {/* <img
                   src={entry.imageUrl}
                   alt={`${entry.name}'s profile`}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="object-cover w-12 h-12 rounded-full"
                 /> */}
                 {/* Name & Location */}
                 <div>
-                  <div className="font-semibold text-xs lg:text-sm text-white">{entry.name}</div>
-                  <div className="lg:text-sm  text-xs text-green-100">{entry.location}</div>
+                  <div className="text-xs font-semibold text-white lg:text-sm">{entry.name}</div>
+                  <div className="text-xs text-green-100 lg:text-sm">{entry.location}</div>
                 </div>
               </div>
               {/* Referrals */}
-              <div className="flex items-center gap-2  px-4 py-2">
+              <div className="flex items-center gap-2 px-4 py-2">
                 <Image src="/cup.svg" width={10} height={10} alt="Trophy" className="w-10 h-10"/>
                 {/* <img src="/cup.svg" alt="Trophy" className="w-10 h-10" /> */}
                 <div className='flex flex-col items-center justify-center'>
-                   <span className="font-bold text-sm text-white">{entry.referrals}</span>
-                <span className="text-green-100 text-xs mt-2">Referrals</span>
+                   <span className="text-sm font-bold text-white">{entry.referrals}</span>
+                <span className="mt-2 text-xs text-green-100">Referrals</span>
 
                 </div>
                
@@ -120,7 +124,7 @@ const LiveLeaderboard: React.FC = () => {
             {showAll && (
               <button
                 className="  bg-[#64961A] sm:px-10 text-white px-4 py-2 rounded  transition-colors cursor-pointer"
-                onClick={() => setShowAll(true)}
+                onClick={() => router.push("https://app.yummealsapp.com")}
               >
                 Join Now
               </button>

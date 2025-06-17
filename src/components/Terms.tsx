@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import React from 'react';
 // import Image from 'next/image';
 
@@ -9,6 +10,7 @@ interface Term {
 }
 
 const Terms: React.FC = () => {
+  const router = useRouter();
   const terms: Term[] = [
     { id: 1, text: 'Participants must be registered users of Yummeals.' },
     { id: 2, text: 'A minimum of 5 successful referrals is required to qualify for the grand prize draw.' },
@@ -20,17 +22,17 @@ const Terms: React.FC = () => {
   ];
 
   return (
-    <div className=" flex justify-center items-center ">
-      <div className="w-full h-full bg-white overflow-hidden">
+    <div className="flex items-center justify-center ">
+      <div className="w-full h-full overflow-hidden bg-white">
         
-        <div className="relative h-120 bg-cover bg-center" style={{ backgroundImage: "url('/edmond.svg')" }}>
+        <div className="relative bg-center bg-cover h-120" style={{ backgroundImage: "url('/edmond.svg')" }}>
         
-          <div className="absolute inset-0 bg-black/55 z-10" />
+          <div className="absolute inset-0 z-10 bg-black/55" />
        
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-20 p-4">
-            <h1 className="lg:text-6xl text-4xl text-white font-bold">Ready to Win Big?</h1>
-            <p className="lg:text-6xl text-4xl mt-4 font-bold text-white">Start Referring Now</p>
-            <button className="mt-15 bg-[#F25B0A]  sm:px-10 text-white px-4 py-2 rounded  transition-colors cursor-pointer">
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4">
+            <h1 className="text-4xl font-bold text-white lg:text-6xl">Ready to Win Big?</h1>
+            <p className="mt-4 text-4xl font-bold text-white lg:text-6xl">Start Referring Now</p>
+            <button onClick={() => router.push("https://app.yummealsapp.com")} className="mt-15 bg-[#F25B0A]  sm:px-10 text-white px-4 py-2 rounded  transition-colors cursor-pointer">
               Join Now
             </button>
           </div>
@@ -38,8 +40,8 @@ const Terms: React.FC = () => {
 
         {/* Terms and Conditions Section */}
         <div className="bg-[#F25B0A] text-white px-15 py-6">
-          <h2 className="text-lg font-bold mb-4 md:text-2xl ">Terms and Conditions</h2>
-          <ul className="list-decimal font-bold list-inside space-y-3 text-sm">
+          <h2 className="mb-4 text-lg font-bold md:text-2xl ">Terms and Conditions</h2>
+          <ul className="space-y-3 text-sm font-bold list-decimal list-inside">
             {terms.map((term) => (
               <li key={term.id} className="text-white">
                 {term.text}

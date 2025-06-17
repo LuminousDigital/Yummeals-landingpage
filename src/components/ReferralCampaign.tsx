@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
 interface DropdownItem {
@@ -10,6 +11,7 @@ interface DropdownItem {
 }
 
 const ReferralCampaign: React.FC = () => {
+  const router = useRouter();
   const dropdownItems: DropdownItem[] = [
     {
       id: 'grand-prize',
@@ -52,11 +54,11 @@ const ReferralCampaign: React.FC = () => {
 
   return (
     <div className='relative'>
-      <div className="flex justify-center items-center lg:mb-40 mb-10 xl:mb-50 md:mb-20 bg-white">
-        <div className="flex flex-col md:flex-row justify-between w-full max-w-8xl bg-white lg:p-20 rounded-lg p-4">
-          <div className="md:w-1/3 flex flex-col items-center md:mt-12 xl:items-start xl:ml-30 mb-6 md:mb-0">
-            <h2 className="lg:text-4xl font-bold lg:mt-5 text-3xl text-gray-800 mb-5">How To Enter</h2>
-            <button className="bg-[#64961A] sm:px-10 text-white px-4 py-2 rounded transition-colors cursor-pointer ">
+      <div className="flex items-center justify-center mb-10 bg-white lg:mb-40 xl:mb-50 md:mb-20">
+        <div className="flex flex-col justify-between w-full p-4 bg-white rounded-lg md:flex-row max-w-8xl lg:p-20">
+          <div className="flex flex-col items-center mb-6 md:w-1/3 md:mt-12 xl:items-start xl:ml-30 md:mb-0">
+            <h2 className="mb-5 text-3xl font-bold text-gray-800 lg:text-4xl lg:mt-5">How To Enter</h2>
+            <button onClick={() => router.push("https://app.yummealsapp.com")} className="bg-[#64961A] sm:px-10 text-white px-4 py-2 rounded transition-colors cursor-pointer ">
               Join Now
             </button>
           </div>
@@ -94,7 +96,7 @@ const ReferralCampaign: React.FC = () => {
                   }`}
                 >
                   {item.content.map((line, index) => (
-                    <p key={index} className="text-black text-sm xl:text-lg font-bold mb-2">
+                    <p key={index} className="mb-2 text-sm font-bold text-black xl:text-lg">
                       {line}
                     </p>
                   ))}
@@ -104,7 +106,7 @@ const ReferralCampaign: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className='w-full absolute -bottom-35 xl:-bottom-140 md:-bottom-50 lg:-bottom-120'>
+      <div className='absolute w-full -bottom-35 xl:-bottom-140 md:-bottom-50 lg:-bottom-120'>
         <Image
           src="/groupfood.svg"
           alt="Trophy"
